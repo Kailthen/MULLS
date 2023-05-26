@@ -11,14 +11,11 @@ sequence_id=00
 exp_id=00
 
 #data path (base folder)
-# diskbase=/media/work/2t/datasets/biaozhi/0424/03/
-diskbase=/media/work/2t/datasets/biaozhi/0415.01
-# diskbase=/media/work/2t/datasets/biaozhi/20130317005/
-# diskbase=/media/work/2t/datasets/biaozhi/20130317006/
+diskbase=/media/work/2t/datasets/argo2_parsed/train012/dc9c2d63-083f-32c3-90ff-943ca823a245.0.157/
 
 #data path (project folder)
 #Example demo
-project_folder=${diskbase}/mulls_slam
+project_folder=${diskbase}/lidar_slam_mulls
 #KITTI
 #project_folder=${diskbase}/kitti-dataset/sequences/${sequence_id}
 #HESAI
@@ -43,7 +40,7 @@ pc_format=pcd
 
 #input point cloud folder path
 #pc_folder=${project_folder}/label_pcd  #used only in semanctic kitti
-pc_folder=${diskbase}/parsed_frames/center_lidar/data
+pc_folder=${diskbase}/center_lidar/data
 
 #input ground truth pose file path (optional)
 gt_body_pose_file=${project_folder}/${sequence_id}.txt #kitti ground truth file
@@ -53,7 +50,7 @@ gt_body_pose_file=${project_folder}/${sequence_id}.txt #kitti ground truth file
 calib_file=${project_folder}/calib.txt
 
 #input config file path
-config_file=./script/config/lo_gflag_list_rsm1.txt
+config_file=./script/config/lo_gflag_list_kitti_urban.txt
 #config_file=./script/config/lo_gflag_list_kitti_urban.txt
 #config_file=./script/config/lo_gflag_list_kitti_highway.txt
 #config_file=./script/config/lo_gflag_list_kitti_ultrafast.txt

@@ -1,20 +1,17 @@
--parameter list (standard for kitti dataset)
+-parameter list (demo)
 ---------------------------------------------------------------------------------------------------------------
---vis_intensity_scale=256
---vis_map_history_down_rate=400
---vis_map_history_keep_frame_num=250
+--vis_map_history_down_rate=1
 -color_map: intensity2=4, intensity=3, elevation=2, frame-wise=1, semantic=0
---vis_initial_color_type=3
---vis_pause_at_loop_closure=false
---show_range_image=false
---show_bev_image=false
+--vis_initial_color_type=0
+--map_downrate_output=8
+--loop_closure_detection_on=true
+--overall_loop_closure_searching_on=false
 ---------------------------------------------------------------------------------------------------------------
 --apply_dist_filter=true
 --min_dist_used=1.5
 --max_dist_used=120.0
 --min_dist_mapping=2.0
 --max_dist_mapping=80.0
---map_downrate_output=8
 --approx_scanner_height=1.8
 --underground_height_thre=-6.0
 --vertical_ang_correction_deg=0.195
@@ -73,7 +70,7 @@
 --sharpen_with_nms_on=true
 --apply_map_based_dynamic_removal=true
 -motion_compensation_method: (0: disabled, 1: uniform motion model (from point-wise timestamp), 2: from azimuth, 3: imu-assisted)
---motion_compensation_method=1
+--motion_compensation_method=3
 -dist_inverse_sampling_method: (0: disabled, 1: linear weight, 2: quadratic weight)
 --dist_inverse_sampling_method=2
 -ground_normal_method: (0: directly use (0,0,1), 1: estimate normal in fixed radius neighborhood, 2: estimate normal in k nearest neighborhood , 3: use ransac to estimate plane coeffs in a grid)
@@ -85,7 +82,6 @@
 -initial_guess_mode: (0: no initial guess, 1: uniform motion(translation only), 2: uniform motion(translation+rotation), 3:imu based)
 --initial_guess_mode=2
 ---------------------------------------------------------------------------------------------------------------
---loop_closure_detection_on=false
 --transfer_correct_reg_tran_on=true
 --adjacent_edge_weight_ratio=1.0
 --map2map_reliable_sigma_thre=0.01
@@ -96,7 +92,6 @@
 --min_iou_thre=0.4
 --min_iou_thre_global_reg=0.5
 --neighbor_search_dist=45.0
---overall_loop_closure_searching_on=false
 --teaser_based_global_registration_on=true
 --reciprocal_feature_match_on=false
 --best_n_feature_match_on=true
