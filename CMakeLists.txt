@@ -52,7 +52,7 @@ list(APPEND CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake_modules")
 
 set(THREADS_PREFER_PTHREAD_FLAG TRUE)
 find_package(Threads REQUIRED)
-find_package(Boost REQUIRED COMPONENTS thread)
+find_package(Boost 1.71 EXACT REQUIRED COMPONENTS thread)
 
 find_package(OpenMP REQUIRED)
 include_directories(${OpenMP_FOUND_INCLUDE_DIRS})
@@ -64,7 +64,7 @@ message("Eigen3 [OK]")
 
 #PCL (neccessary)
 #Boost, vtk, flann, eigen are involved in PCL
-find_package(PCL REQUIRED QUIET)
+find_package(PCL 1.10 EXACT REQUIRED QUIET)
 include_directories(${PCL_INCLUDE_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 list(REMOVE_ITEM PCL_LIBRARIES "vtkproj4")

@@ -2,6 +2,10 @@
 
 set -e 
 
+export PATH=/opt/fangyuan/MULLS/bin:${PATH}
+# export PATH=./bin:${PATH}
+which mulls_slam
+
 #########################################################################################
 #                                  MULLS SLAM                                           #
 ############################# part to configure (down)###################################
@@ -11,32 +15,10 @@ sequence_id=00
 exp_id=00
 
 #data path (base folder)
-diskbase=/media/work/2t/datasets/argo2_parsed/train012/dc9c2d63-083f-32c3-90ff-943ca823a245.0.157/
+diskbase=/media/work/2t/a4d/argo2_parsed/train012/dc9c2d63-083f-32c3-90ff-943ca823a245.0.157
 
-#data path (project folder)
-#Example demo
 project_folder=${diskbase}/lidar_slam_mulls
-#KITTI
-#project_folder=${diskbase}/kitti-dataset/sequences/${sequence_id}
-#HESAI
-#project_folder=${diskbase}/hesai-dataset/sequences/xxx
-#Baidu
-#project_folder=${diskbase}/apollo-dataset/sequences/xxx
-#UrbanLoc
-#project_folder=${diskbase}/urbanloc-dataset/sequences/xxx
-#Ford Campus
-#project_folder=${diskbase}/ford-dataset/IJRR-Dataset-1
-#MIMAP
-#project_folder=${diskbase}/mimap-dataset/mimap_in_slam_00
-
-#point cloud format (selecting from pcd, ply, las, txt, h5, csv, bin)
 pc_format=pcd
-#pc_format=ply
-#pc_format=h5
-#pc_format=txt
-#pc_format=las
-#pc_format=csv
-#pc_format=bin
 
 #input point cloud folder path
 #pc_folder=${project_folder}/label_pcd  #used only in semanctic kitti
@@ -50,10 +32,11 @@ gt_body_pose_file=${project_folder}/${sequence_id}.txt #kitti ground truth file
 calib_file=${project_folder}/calib.txt
 
 #input config file path
-config_file=./script/config/lo_gflag_list_kitti_urban.txt
-#config_file=./script/config/lo_gflag_list_kitti_urban.txt
+# config_file=./script/config/lo_gflag_list_kitti_urban.txt
+config_file=./script/config/lo_gflag_list_kitti_argo2.txt
 #config_file=./script/config/lo_gflag_list_kitti_highway.txt
 #config_file=./script/config/lo_gflag_list_kitti_ultrafast.txt
+# config_file=./script/config/lo_gflag_list_64.txt
 
 #input the frame you'd like to use
 frame_begin=0
@@ -85,8 +68,8 @@ ls ${pc_folder} >> ${pc_folder}_filelist.txt
 
 #run (you can comment this part to directly evaluate the already calculated lidar odometry's result)
 #--v : log_vebose_level, increase it to remove the logs
-# gdb --args \
-./bin/mulls_slam \
+# gdbserver :1234 \
+mulls_slam \
 --colorlogtostderr=true \
 -stderrthreshold 0 \
 -log_dir ${log_dir} \
@@ -107,12 +90,13 @@ ls ${pc_folder} >> ${pc_folder}_filelist.txt
 --frame_num_end=${frame_end} \
 --frame_step=${frame_step} \
 --flagfile=${config_file} \
---real_time_viewer_on=0 \
+--real_time_viewer_on=1 \
 --gt_in_lidar_frame=0 \
 --gt_oxts_format=0 \
 --write_out_map_on=1 \
 --write_out_gt_map_on=0 \
 --write_map_each_frame=0
+# --initial_scan2scan_frame_num=5
 
 #please set the parameters in the config file 
 
@@ -133,6 +117,6 @@ evaluation_file=${project_folder}/result/Rt_lo_${exp_id}_evaluation.txt
 # replay the lidar odometry if you want
 #vis_down_rate=1000
 #gdb --args \
-#./bin/replay_slam ${pc_folder} ${lo_lidar_pose_file} ${gt_lidar_pose_file} ${evaluation_file} .${pc_format} ${frame_begin} ${frame_end} ${frame_step} ${vis_down_rate}
+# replay_slam ${pc_folder} ${lo_lidar_pose_file} ${gt_lidar_pose_file} ${evaluation_file} .${pc_format} ${frame_begin} ${frame_end} ${frame_step} ${vis_down_rate}
 
 ############################### no need to edit (up) ###################################

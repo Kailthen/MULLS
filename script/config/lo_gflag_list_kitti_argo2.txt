@@ -69,7 +69,7 @@
 --map_min_dist_within_feature=0.01
 --s2m_frequency=1
 ---------------------------------------------------------------------------------------------------------------
---vertical_ang_calib_on=true
+--vertical_ang_calib_on=false
 --apply_scanner_filter=true
 --fixed_num_downsampling_on=true
 --sharpen_with_nms_on=true
