@@ -3,26 +3,16 @@
 set -e 
 
 export PATH=/opt/fangyuan/MULLS/bin:${PATH}
-# export PATH=./bin:${PATH}
 which mulls_slam
 
-#########################################################################################
-#                                  MULLS SLAM                                           #
-############################# part to configure (down)###################################
 sequence_id=00
-
-#experiment unique name
 exp_id=00
 
-#data path (base folder)
-diskbase=/media/work/2t/a4d/argo2_parsed/train012/dc9c2d63-083f-32c3-90ff-943ca823a245.0.157
+config_file=${MULLS_CONFIG:-./script/config/lo_gflag_list_kitti_argo2.txt}
+project_folder=${output_dir:-/media/work/2t/a4d/argo2_parsed/train012/dc9c2d63-083f-32c3-90ff-943ca823a245.0.157/lidar_slam_MULLS/center_lidar}
+pc_folder=${input_pcd_dir:-/media/work/2t/a4d/argo2_parsed/train012/dc9c2d63-083f-32c3-90ff-943ca823a245.0.157/center_lidar/data}
 
-project_folder=${diskbase}/lidar_slam_mulls
 pc_format=pcd
-
-#input point cloud folder path
-#pc_folder=${project_folder}/label_pcd  #used only in semanctic kitti
-pc_folder=${diskbase}/center_lidar/data
 
 #input ground truth pose file path (optional)
 gt_body_pose_file=${project_folder}/${sequence_id}.txt #kitti ground truth file
@@ -30,13 +20,6 @@ gt_body_pose_file=${project_folder}/${sequence_id}.txt #kitti ground truth file
 
 #input calibration file path (optional) 
 calib_file=${project_folder}/calib.txt
-
-#input config file path
-# config_file=./script/config/lo_gflag_list_kitti_urban.txt
-config_file=./script/config/lo_gflag_list_kitti_argo2.txt
-#config_file=./script/config/lo_gflag_list_kitti_highway.txt
-#config_file=./script/config/lo_gflag_list_kitti_ultrafast.txt
-# config_file=./script/config/lo_gflag_list_64.txt
 
 #input the frame you'd like to use
 frame_begin=0
@@ -59,6 +42,7 @@ timing_report_file=${project_folder}/result/timing_table_${exp_id}.txt
 log_dir=${project_folder}/log
 
 mkdir -p ${log_dir}
+rm -fr ${project_folder}/result
 mkdir ${project_folder}/result
 mkdir ${map_pc_folder}
 mkdir ${map_pc_folder}_gt
@@ -90,7 +74,7 @@ mulls_slam \
 --frame_num_end=${frame_end} \
 --frame_step=${frame_step} \
 --flagfile=${config_file} \
---real_time_viewer_on=1 \
+--real_time_viewer_on=${real_time_viewer_on:-0} \
 --gt_in_lidar_frame=0 \
 --gt_oxts_format=0 \
 --write_out_map_on=1 \
