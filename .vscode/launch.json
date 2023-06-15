@@ -1,0 +1,58 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "C/C++: mulls_slam attach",
+            "type": "cppdbg",
+            // "request": "launch",
+            "request": "attach",
+            "program": "/media/work/2t/a4d-argo2/road-cognition/lidar/MULLS/bin/mulls_slam",
+            "MIMode": "gdb",
+            "miDebuggerPath": "/usr/bin/gdb",
+            "setupCommands": [
+              {
+                "description": "Enable pretty-printing for gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+              }
+            ],
+        },
+        {
+            "name": "C/C++ gdb server: mulls_slam ",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/media/work/2t/a4d-argo2/road-cognition/lidar/MULLS/bin/mulls_slam",
+            "cwd": "${workspaceFolder}",
+            "externalConsole": true,
+            "miDebuggerServerAddress": "localhost:1234",
+            "MIMode": "gdb",
+        },
+        {
+            "name": "C/C++: mulls_slam ",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "/media/work/2t/a4d-argo2/road-cognition/lidar/MULLS/bin/mulls_slam",
+            "args": [
+                
+            ],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            // "MIMode": "gdb",
+            // "miDebuggerPath": "/usr/bin/gdb",
+            "miDebuggerServerAddress": "localhost:1234",
+            "setupCommands": [
+              {
+                "description": "Enable pretty-printing for gdb",
+                "text": "-enable-pretty-printing",
+                "ignoreFailures": true
+              }
+            ],
+            // "preLaunchTask": "C/C++: g++ build active file"
+        }
+    ]
+}
